@@ -43,8 +43,8 @@ export default function Hero() {
   return (
     <section id="home" className="hero" ref={sectionRef}>
       <div className="hero-bg">
-        <video autoPlay muted loop playsInline poster="https://assets.mixkit.co/videos/47314/47314-thumb-720-3.jpg">
-          <source src="https://assets.mixkit.co/videos/47314/47314-720.mp4" type="video/mp4" />
+        <video autoPlay muted loop playsInline poster="https://images.pexels.com/videos/9136346/pexels-photo-9136346.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=2000">
+          <source src="https://videos.pexels.com/video-files/9136346/9136346-hd_1920_1080_25fps.mp4" type="video/mp4" />
         </video>
       </div>
       <div className="hero-float-shape" />
