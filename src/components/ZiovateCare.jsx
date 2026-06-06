@@ -52,7 +52,7 @@ export default function ZiovateCare() {
             ))}
           </div>
 
-          <div className="z-buttons" style={{ marginTop: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <div className="z-buttons" style={{ marginTop: '4rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <a href="#contact" className="btn btn-terracotta" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}>
               <Smartphone size={16} /> Coming Soon
             </a>

@@ -1,27 +1,24 @@
 import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Motto from './components/Motto';
-import About from './components/About';
-import BusinessVerticals from './components/BusinessVerticals';
-import PoultryShowcase from './components/PoultryShowcase';
-import EggJourney from './components/EggJourney';
-import DairyShowcase from './components/DairyShowcase';
-import OrganicShowcase from './components/OrganicShowcase';
-import ZiovateCare from './components/ZiovateCare';
-import WhyChooseUs from './components/WhyChooseUs';
-import Statistics from './components/Statistics';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import PoultryPage from './pages/PoultryPage';
+import DairyPage from './pages/DairyPage';
+import OrganicPage from './pages/OrganicPage';
+import HealthAppPage from './pages/HealthAppPage';
+import WellnessPlansPage from './pages/WellnessPlansPage';
+import AITrackingPage from './pages/AITrackingPage';
 import './index.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -40,33 +37,30 @@ function App() {
     return () => {
       lenis.destroy();
     };
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>
       <Navbar />
-      <main>
-        <Hero />
-        <EggJourney />
-        <div className="wheat-divider"><span className="wheat-icon">✦</span></div>
-        <Motto />
-        <div className="wheat-divider"><span className="wheat-icon">✦</span></div>
-        <About />
-        <div className="wheat-divider"><span className="wheat-icon">✦</span></div>
-        <BusinessVerticals />
-        <PoultryShowcase />
-        <DairyShowcase />
-        <OrganicShowcase />
-        <ZiovateCare />
-        <div className="wheat-divider"><span className="wheat-icon">✦</span></div>
-        <WhyChooseUs />
-        <Statistics />
-        <div className="wheat-divider"><span className="wheat-icon">✦</span></div>
-        <Testimonials />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/poultry" element={<PoultryPage />} />
+        <Route path="/dairy" element={<DairyPage />} />
+        <Route path="/organic" element={<OrganicPage />} />
+        <Route path="/health-app" element={<HealthAppPage />} />
+        <Route path="/wellness-plans" element={<WellnessPlansPage />} />
+        <Route path="/ai-tracking" element={<AITrackingPage />} />
+      </Routes>
       <Footer />
     </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 

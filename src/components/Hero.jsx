@@ -54,17 +54,17 @@ export default function Hero() {
       <div className="farm-dots farm-dots-2" style={{ fontSize: 14, letterSpacing: 6, color: 'var(--primary-light)' }}>•••</div>
       <div className="hero-content">
         <h1 className="hero-title">
-          <div className="hero-title-line">Premium. Organic.</div>
+          <div className="hero-title-line">Health. Wellness.</div>
           <div className="hero-title-line">
-            <span className="em">Affordable.</span>
+            <span className="em">Reimagined.</span>
           </div>
           <div className="hero-title-line">
-            <span className="em">Flavour of Bengal.</span>
+            <span className="em">Reimagine Life.</span>
           </div>
         </h1>
         <p className="hero-desc">
-          Poultry · Dairy · Organic Food · Ziovate Care<br />
-          From our family farms to your table — ethically raised, naturally grown, and pure.
+          Ziovate Care · Organic Food · Poultry · Dairy<br />
+          From cutting-edge health tracking to our family farms to your table. Pure, natural, and advanced.
         </p>
         <div className="hero-actions">
           <a href="#verticals" className="btn btn-primary" onClick={(e) => { e.preventDefault(); document.querySelector('#verticals')?.scrollIntoView({ behavior: 'smooth' }); }}>

@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const links = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Poultry', href: '#poultry' },
-  { label: 'Dairy', href: '#dairy' },
-  { label: 'Organic', href: '#organic' },
-  { label: 'Ziovate', href: '#ziovate' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/#about' },
+  { label: 'ZioFarm', href: '/#ziofarm' },
+  { label: 'ZiovateCare', href: '/#ziovatecare' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export default function Navbar() {
@@ -15,6 +14,8 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const lastScroll = useRef(0);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => {
@@ -27,25 +28,40 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollTo = (id) => {
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
     setOpen(false);
-    const el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (href === '/') {
+      navigate('/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (href.startsWith('/#')) {
+      const hash = href.slice(2);
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+      } else {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
     <>
       <nav className={`navbar${scrolled ? ' glass-nav' : ''}${hidden ? ' hidden' : ''}`}>
-        <a href="#home" className="nav-brand" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-          <img src="/logo.jpeg" alt="ZioFarm" className="nav-logo" />
-          Zio<span>Farm</span>
-        </a>
+        <Link to="/" className="nav-brand" onClick={(e) => { e.preventDefault(); navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+          <img src="/logo.jpeg" alt="Ziovate" className="nav-logo" />
+          <div>Zio<span>vate</span></div>
+        </Link>
 
         <div className="nav-links">
           {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={(e) => { e.preventDefault(); scrollTo(l.href); }}>{l.label}</a>
+            <a key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href)}>{l.label}</a>
           ))}
-          <a href="#contact" className="nav-cta" onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}>Get in Touch</a>
+          <a href="/#contact" className="nav-cta" onClick={(e) => handleNavClick(e, '/#contact')}>Get in Touch</a>
         </div>
 
         <button className={`nav-mobile${open ? ' open' : ''}`} onClick={() => setOpen(!open)} aria-label="Menu">
@@ -55,9 +71,9 @@ export default function Navbar() {
 
       <div className={`mobile-menu${open ? ' open' : ''}`}>
         {links.map((l) => (
-          <a key={l.href} href={l.href} onClick={(e) => { e.preventDefault(); scrollTo(l.href); }}>{l.label}</a>
+          <a key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href)}>{l.label}</a>
         ))}
-        <a href="#contact" className="btn btn-primary" onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}>Get in Touch</a>
+        <a href="/#contact" className="btn btn-primary" onClick={(e) => handleNavClick(e, '/#contact')}>Get in Touch</a>
       </div>
     </>
   );

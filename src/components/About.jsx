@@ -31,13 +31,13 @@ export default function About() {
         <div>
           <p className="section-label about-label">Our Story</p>
           <h2 className="section-title about-title">
-            Bringing the <span className="em">Flavour of Bengal</span> to Every Home
+            Reimagine <span className="em">Health & Life</span> Every Day
           </h2>
           <p className="section-desc about-desc">
-            ZioFarm is where Bengal's lush green farms meet modern organic farming. We bring you farm-fresh eggs, pure dairy, organic produce, and smart health — all rooted in the rich agricultural heritage of Bengal.
+            Ziovate is where modern health tracking meets pure, organic agriculture. We bring you farm-fresh food and smart wellness tools — all aimed at a better, healthier you.
           </p>
           <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: 'var(--text-muted)', maxWidth: 480 }}>
-            Every product carries the love of our farmers, the richness of our soil, and the promise of a healthier tomorrow.
+            Every product and service carries our promise of purity, advanced science, and a healthier tomorrow.
           </p>
           <div className="about-stats">
             {stats.map((s, i) => (

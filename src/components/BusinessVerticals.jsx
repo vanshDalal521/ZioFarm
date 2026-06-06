@@ -1,50 +1,37 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Egg, Milk, Apple, HeartPulse } from 'lucide-react';
+import { Leaf, HeartPulse, X, ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const verticals = [
+const pillars = [
   {
-    title: 'Poultry',
-    desc: 'Ethically raised free-range poultry. Farm-fresh eggs and premium chicken from happy, healthy birds.',
-    products: ['Free-Range Eggs', 'Premium Chicken', 'Organic Feed'],
-    image: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&q=80&w=600&h=800',
-    id: 'poultry',
-    icon: Egg,
-    hue: 40,
+    id: 'ziofarm',
+    title: 'ZioFarm',
+    subtitle: 'Pure Agriculture',
+    desc: 'Our agricultural wing dedicated to pure, organic, and ethically raised produce. From our family farms directly to your table.',
+    fullDesc: 'ZioFarm represents the culmination of generations of Bengal\'s agricultural wisdom combined with modern organic practices. We operate over 50 partner farms to ensure every egg, every drop of milk, and every vegetable is completely untouched by harmful chemicals.',
+    products: ['Poultry & Free-Range Eggs', 'Premium Dairy & Paneer', 'Organic Vegetables & Grains'],
+    features: ['100% Organic Certified', 'Ethically Raised Poultry', 'Grass-fed Dairy Cows'],
+    image: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&q=80&w=800&h=1000',
+    icon: Leaf,
   },
   {
-    title: 'Dairy',
-    desc: 'Pure, creamy milk from grass-fed cows. Paneer, ghee, butter — untouched and natural.',
-    products: ['Fresh Milk', 'Pure Ghee', 'Farm Paneer'],
-    image: 'https://images.pexels.com/photos/7584792/pexels-photo-7584792.jpeg?auto=compress&cs=tinysrgb&w=600',
-    id: 'dairy',
-    icon: Milk,
-    hue: 35,
-  },
-  {
-    title: 'Organic Food',
-    desc: 'Sun-ripened vegetables, sweet fruits, ancient grains, and aromatic spices from Bengal soil.',
-    products: ['Fresh Vegetables', 'Seasonal Fruits', 'Ancient Grains'],
-    image: 'https://images.pexels.com/photos/1400172/pexels-photo-1400172.jpeg?auto=compress&cs=tinysrgb&w=600',
-    id: 'organic',
-    icon: Apple,
-    hue: 120,
-  },
-  {
-    title: 'Ziovate Care',
-    desc: 'AI-powered health companion for smart wellness tracking and real-time health monitoring.',
-    products: ['Health Tracking', 'AI Insights', 'Wellness Plans'],
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600&h=800',
-    id: 'ziovate',
+    id: 'ziovatecare',
+    title: 'ZiovateCare',
+    subtitle: 'Smart Health Tech',
+    desc: 'Our advanced health-tech wing. A complete AI-powered companion for wellness, real-time insights, and modern living.',
+    fullDesc: 'ZiovateCare bridges the gap between the natural food you consume and your body\'s real-time needs. Using cutting-edge AI and seamless health tracking, we provide personalized wellness plans and immediate insights to optimize your lifestyle.',
+    products: ['Health Tracking App', 'Real-time AI Insights', 'Personalized Wellness Plans'],
+    features: ['24/7 Vitals Tracking', 'Personalized Diets', 'AI Health Coach'],
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800&h=1000',
     icon: HeartPulse,
-    hue: 0,
   },
 ];
 
 export default function BusinessVerticals() {
+  const [activeModal, setActiveModal] = useState(null);
   const sectionRef = useRef(null);
   const cardRefs = useRef([]);
 
@@ -54,7 +41,7 @@ export default function BusinessVerticals() {
       gsap.from('.vert-title', { scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' }, y: 40, rotationX: 15, transformOrigin: 'center top', duration: 0.8, ease: 'power3.out' });
       gsap.from('.vertical-card', {
         scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' },
-        y: 60, rotationX: 25, transformOrigin: 'center bottom', duration: 0.7, stagger: 0.12, ease: 'power2.out',
+        y: 60, rotationX: 25, transformOrigin: 'center bottom', duration: 0.7, stagger: 0.2, ease: 'power2.out',
       });
     }, sectionRef);
     return () => ctx.revert();
@@ -68,8 +55,8 @@ export default function BusinessVerticals() {
     const y = e.clientY - rect.top;
     const cx = rect.width / 2;
     const cy = rect.height / 2;
-    const rx = ((y - cy) / cy) * -8;
-    const ry = ((x - cx) / cx) * 8;
+    const rx = ((y - cy) / cy) * -4;
+    const ry = ((x - cx) / cx) * 4;
     card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-8px)`;
     card.style.transition = 'transform 0.1s ease-out';
   }, []);
@@ -89,47 +76,90 @@ export default function BusinessVerticals() {
   return (
     <section id="verticals" className="section section-beige verticals-section" ref={sectionRef}>
       <div className="verticals-bg-glow" />
-      <div className="farm-dots farm-dots-3" style={{ fontSize: 16, letterSpacing: 10, color: 'var(--sand)' }}>•••</div>
       <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-        <p className="section-label vert-label">Our Verticals</p>
-        <h2 className="section-title vert-title" style={{ maxWidth: 600 }}>
-          Four pillars of{' '}
-          <span className="em">trust & quality</span>
+        <p className="section-label vert-label">The Ziovate Umbrella</p>
+        <h2 className="section-title vert-title" style={{ maxWidth: 700 }}>
+          Two pillars of{' '}
+          <span className="em">health & purity</span>
         </h2>
         <p className="section-desc">
-          From farm to table — each vertical is built on generations of Bengal's agricultural wisdom.
+          Bridging the gap between natural, ethical agriculture and advanced health tracking technology.
         </p>
       </div>
 
-      <div className="verticals-grid">
-        {verticals.map((v, i) => {
+      <div className="verticals-grid pillars-layout">
+        {pillars.map((v, i) => {
           const Icon = v.icon;
           return (
             <div
               key={i}
               ref={(el) => cardRefs.current[i] = el}
-              className="vertical-card"
+              className="vertical-card pillar-card"
               onMouseMove={(e) => handleMouseMove(e, i)}
               onMouseLeave={() => handleMouseLeave(i)}
-              onClick={() => scrollTo(v.id)}
+              onClick={() => setActiveModal(v)}
             >
               <div className="vertical-bg" style={{ backgroundImage: `url(${v.image})` }} />
               <div className="vertical-glow" />
-              <span className="tag">
-                <Icon size={14} />
-                <span>0{i + 1}</span>
-              </span>
-              <h3>{v.title}</h3>
-              <p>{v.desc}</p>
-              <div className="vertical-products">
-                {v.products.map((p, j) => (
-                  <span key={j} className="product-chip">{p}</span>
-                ))}
+              <div className="pillar-content">
+                <span className="tag">
+                  <Icon size={18} />
+                  <span>{v.subtitle}</span>
+                </span>
+                <h3 className="pillar-title">{v.title}</h3>
+                <p className="pillar-desc">{v.desc}</p>
+                <div className="vertical-products">
+                  {v.products.map((p, j) => (
+                    <span key={j} className="product-chip">{p}</span>
+                  ))}
+                </div>
               </div>
             </div>
           );
         })}
       </div>
+
+      {activeModal && (
+        <div className="pillar-modal-overlay" onClick={() => setActiveModal(null)}>
+          <div className="pillar-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="pillar-modal-close" onClick={() => setActiveModal(null)}>
+              <X size={24} />
+            </button>
+            <div className="pillar-modal-image" style={{ backgroundImage: `url(${activeModal.image})` }} />
+            <div className="pillar-modal-body">
+              <span className="section-label">{activeModal.subtitle}</span>
+              <h2 className="section-title">{activeModal.title}</h2>
+              <p className="section-desc">{activeModal.fullDesc}</p>
+              
+              <div className="pillar-modal-lists">
+                <div>
+                  <h4>Key Products</h4>
+                  <ul>
+                    {activeModal.products.map((p, idx) => (
+                      <li key={idx}>{p}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4>Features</h4>
+                  <ul>
+                    {activeModal.features.map((f, idx) => (
+                      <li key={idx}>{f}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              
+              <button className="btn btn-primary" style={{ marginTop: '2rem' }} onClick={() => {
+                setActiveModal(null);
+                setTimeout(() => scrollTo(activeModal.id === 'ziofarm' ? 'poultry' : 'ziovate'), 300);
+              }}>
+                Explore Details <ArrowRight size={18} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
